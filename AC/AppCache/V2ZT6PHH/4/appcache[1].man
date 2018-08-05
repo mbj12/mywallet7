@@ -1,0 +1,11 @@
+CACHE MANIFEST
+
+# ver:2.0.6667.31209;;0
+
+CACHE:
+//static-spartan-neu-s-msn-com.akamaized.net/spartan/da-dk/_ssc/css/e6001bca-db7674a5/kernel-5d6dad1c.css?ver=2.0.6667.31209
+//static-spartan-neu-s-msn-com.akamaized.net/spartan/da-dk/_ssc/js/e6001bca-a6f5a3d4/kernel-3ae91e47.js?ver=2.0.6667.31209
+//static-spartan-neu-s-msn-com.akamaized.net/_h/975a7d20/webcore/externalscripts/jquery/jquery-2.1.1.min.js
+
+NETWORK:
+*

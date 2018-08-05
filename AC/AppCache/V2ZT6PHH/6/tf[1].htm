@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; CHARSET=utf-8">
+    <meta http-equiv="pragma" content="no-cache"/>
+    <title>Continue</title>
+    <noscript>JavaScript is required to sign in.</noscript>
+
+    <script type="text/javascript">
+
+        function DoSubmit() {
+            var idToken;
+            var state;
+            var code;
+            var hashString = window.location.hash;
+            var shouldSubmit = false;
+            if (hashString != null) {
+                if (hashString.indexOf('#') == 0) {
+                    hashString = hashString.substr(1);
+                }
+                var hashParams = hashString.split('&');
+                if (hashParams != null) {
+                    var idTokenQueryName = 'id_token=';
+                    var stateQueryName = 'state=';
+                    var codeQueryName = 'code=';
+                    for (var i = 0; i < hashParams.length; ++i) {
+                        if (hashParams[i].indexOf(idTokenQueryName) == 0) {
+                            idToken = hashParams[i].substr(idTokenQueryName.length);
+                        }
+                        else if (hashParams[i].indexOf(stateQueryName) == 0) {
+                            state = hashParams[i].substr(stateQueryName.length);
+                        }
+                        else if (hashParams[i].indexOf(codeQueryName) == 0) {
+                            code = hashParams[i].substr(codeQueryName.length);
+                        }
+                    }
+                    if (idToken != null && state != null && code != null) {
+                        var currentHost = window.location.hostname;
+                        if (currentHost != null) {
+                            var postBackUrl = 'https://' + currentHost + '/owa/';                            
+                            shouldSubmit = true;                            
+                        }
+                    }
+                }
+            }
+            window.history.replaceState({}, "Continue", '/owa/');
+            if (shouldSubmit) {
+                var subt = false;
+                if (!subt) {
+                    subt = true;
+                    document.fmHF.setAttribute('action', postBackUrl);
+                    document.fmHF.id_token.setAttribute('value', idToken);
+                    document.fmHF.code.setAttribute('value', code);
+                    document.fmHF.state.setAttribute('value', state);
+                    document.fmHF.submit();
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <body onload="javascript:DoSubmit();">
+    <form name="fmHF" id="fmHF" action="" method="post" target="_self">
+        <input type="hidden" name="id_token" id="id_token" value="">
+        <input type="hidden" name="code" id="code" value="">
+        <input type="hidden" name="state" id="state" value="">        
+    </form>
+</body>
+</html>
